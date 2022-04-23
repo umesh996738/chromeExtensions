@@ -1,8 +1,29 @@
 let myLead = [];
 const searchE1 = document.getElementById("search-el");
-const clickE1 = document.getElementById('click-btn');
+const clickE1 = document.getElementById('click-btn1');
 const ulE1 = document.getElementById("ul-el");
 const clearE1 = document.getElementById("clear-btn");
+
+
+//localStorage.clear();
+const leadFromStorage = JSON.parse(localStorage.getItem("myLead"));
+
+
+
+
+if (leadFromStorage) {
+
+    myLead = leadFromStorage;
+    renderLead();
+
+}
+clearE1.addEventListener("dbClick", function() {
+    localStorage.clear();
+    myLead = [];
+    renderLead();
+
+})
+
 
 
 clickE1.addEventListener("click", function() {
@@ -10,6 +31,7 @@ clickE1.addEventListener("click", function() {
     //console.log(myLead);
     //2. call the renderLead() function \
     searchE1.value = "";
+    localStorage.setItem("myLead", JSON.stringify(myLead));
     renderLead();
 
 
@@ -33,7 +55,7 @@ function renderLead() {
 
         listItems += `<li>
         <a target="_blank" href='${myLead[i]}'>
-        ${myLead[i]}
+        ${myLead[i]}                              
         </a>
         
         </li>`;
@@ -46,3 +68,4 @@ function renderLead() {
     ulE1.innerHTML = listItems;
 
 }
+//storing array in local storage
